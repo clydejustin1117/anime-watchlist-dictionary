@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/clydejustin1117/anime-watchlist-dictionary/issues"
   },
-  "homepage": "https://github.com/clydejustin1117/anime-watchlist-dictionary#readme"
+  "homepage": "https://github.com/clydejustin1117/anime-watchlist-dictionary#readme",
+  "dependencies": {
+    "react-hot-toast": "^2.6.0",
+    "react-router-dom": "^7.10.1"
+  }
 }

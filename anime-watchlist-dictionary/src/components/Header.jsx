@@ -1,19 +1,49 @@
-import logo from '../assets/logo.png'; 
 
-const Header = () => {
+import logo from '../assets/logo.png';
+import { Sun, Moon } from "lucide-react"; 
+
+const Header = ({ onToggleTheme, theme, onOpenSettings }) => {
   return (
-<header className="py-6 px-20 bg-gradient-to-ri from-blue-100 via-white to-blue-100 shadow-md">
-  <article className="flex justify-center items-center">
-    <div className="flex items-center space-x-4">
-      <img src={logo} alt="Anime Watchlist Logo" className="w-14 h-14 object-contain drop-shadow-md"/>
-      <h1 className="text-3xl font-extrabold text-blue-700 tracking-tight drop-shadow-sm">
-        Anime Watchlist Dictionary
-      </h1>
-    </div>
-  </article>
-</header>
+    <header className="py-6 px-10 bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 shadow-md transition-colors">
+      <article className="flex justify-between items-center">
+        
+        
+        <div className="flex items-center space-x-4">
+          <img
+            src={logo}
+            alt="Anime Watchlist Logo"
+            className="w-14 h-14 object-contain drop-shadow-md"
+          />
+         <h1
+  className="text-3xl font-extrabold tracking-tight"
+  style={{ color: "var(--accent-color)" }}
+>
+  Anime Watchlist Dictionary
+</h1>
+
+        </div>
+
+      <button
+  onClick={onOpenSettings}
+  className="px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-sm font-medium hover:opacity-80"
+>
+  ⚙ Settings
+</button>
 
 
+       
+        <button
+          onClick={onToggleTheme}
+          className="p-2 rounded-full bg-white dark:bg-gray-700 shadow hover:scale-105 transition"
+        >
+          {theme === "light" ? (
+            <Moon size={22} className="text-gray-800" />
+          ) : (
+            <Sun size={22} className="text-yellow-300" />
+          )}
+        </button>
+      </article>
+    </header>
   );
 };
 
