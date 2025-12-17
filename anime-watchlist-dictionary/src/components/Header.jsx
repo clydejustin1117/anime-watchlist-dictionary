@@ -8,7 +8,7 @@ const Header = ({ onToggleTheme, theme, onOpenSettings }) => {
       <article className="flex justify-between items-center">
         
         
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <img
             src={logo}
             alt="Anime Watchlist Logo"
@@ -25,7 +25,7 @@ const Header = ({ onToggleTheme, theme, onOpenSettings }) => {
 
       <button
   onClick={onOpenSettings}
-  className="px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-sm font-medium hover:opacity-80"
+  className="px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-sm font-medium hover:opacity-80 transition"
 >
   ⚙ Settings
 </button>
@@ -34,12 +34,12 @@ const Header = ({ onToggleTheme, theme, onOpenSettings }) => {
        
         <button
           onClick={onToggleTheme}
-          className="p-2 rounded-full bg-white dark:bg-gray-700 shadow hover:scale-105 transition"
+          className="p-2 sm:p-3 rounded-full bg-white dark:bg-gray-700 shadow hover:scale-105 transition"
         >
           {theme === "light" ? (
-            <Moon size={22} className="text-gray-800" />
+            <Moon size={20} className="text-gray-800" />
           ) : (
-            <Sun size={22} className="text-yellow-300" />
+            <Sun size={20} className="text-yellow-300" />
           )}
         </button>
       </article>

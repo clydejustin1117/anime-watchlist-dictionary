@@ -4,7 +4,7 @@ export default function AnimeCard({ anime, onAdd }) {
       <img
         src={anime.images?.jpg?.image_url}
         alt={anime.title}
-        className="rounded-md mb-3 h-60 object-cover"
+        className="rounded-md mb-3 h-48 sm:h-60 object-cover"
       />
 
       <h3 className="text-sm sm:text-base font-semibold text-blue-700 dark:text-white mb-2">
