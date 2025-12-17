@@ -42,14 +42,14 @@ export default function SearchBar({ onSearch }) {
   return (
     <div
     ref={wrapperRef}
-     className="relative max-w-lg mx-auto mt-10">
+     className="relative w-full max-w-lg mx-auto mt-6 px-2">
       <input
         type="text"
         value={query}
         onChange={handleChange}
         onKeyDown={(e) => e.key === "Enter" && onSearch(query)}
         placeholder="Search anime..."
-        className=" w-full p-3 rounded-lg shadow-sm border border-gray-300 dark:border-gray-600
+        className=" w-full  p-4 text-base rounded-lg shadow-sm border border-gray-300 dark:border-gray-600
   bg-white dark:bg-gray-800
   text-gray-900 dark:text-gray-100
   placeholder-gray-400 dark:placeholder-gray-500

@@ -12,6 +12,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [showWatchlist, setShowWatchlist] = useState(false);
+
 
 const [accent, setAccent] = useState(() => {
   return localStorage.getItem("accent") || "blue";
@@ -132,7 +134,7 @@ const toggleTheme = () => {
 
     <SearchBar onSearch={handleSearch} />
 
-    <section className="px-8 mt-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <section className="px-4 sm:px-6 md:px-8 mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="md:col-span-2">
        <AnimeList
   results={results}
@@ -142,8 +144,8 @@ const toggleTheme = () => {
 />
 
       </div>
-
-      <div>
+      
+      <div className="hidden md:block">
         <Watchlist
           items={watchlist}
           onRemove={removeFromWatchlist}
@@ -151,6 +153,34 @@ const toggleTheme = () => {
         />
       </div>
     </section>
+    <button
+  onClick={() => setShowWatchlist(true)}
+  className="md:hidden fixed bottom-4 right-4 z-50 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition"
+>
+  📌 Watchlist ({watchlist.length})
+</button>
+
+{showWatchlist && (
+  <div className="fixed inset-0 z-50 bg-black/40">
+    <div className="absolute bottom-0 w-full bg-white dark:bg-gray-900 rounded-t-2xl p-4 max-h-[80vh] overflow-y-auto">
+      
+      
+      <button
+        onClick={() => setShowWatchlist(false)}
+        className="mb-3 text-sm text-gray-500 dark:text-gray-400"
+      >
+        Close
+      </button>
+
+      <Watchlist
+        items={watchlist}
+        onRemove={removeFromWatchlist}
+        onOpenDetails={openAnimeDetails}
+      />
+    </div>
+  </div>
+)}
+
 <SettingsPanel
   open={settingsOpen}
   onClose={() => setSettingsOpen(false)}

@@ -2,7 +2,7 @@ import EmptyState from "./EmptyState.jsx";
 
 export default function Watchlist({ items, onRemove, onOpenDetails }) {
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg sticky top-5 border border-gray-100 dark:border-gray-700">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg md:sticky md:top-5 border border border-gray-100 dark:border-gray-700">
      <h2
   className="text-2xl font-bold mb-4"
   style={{ color: "var(--accent-color)" }}

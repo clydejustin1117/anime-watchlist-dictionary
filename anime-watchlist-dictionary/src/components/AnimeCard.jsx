@@ -7,7 +7,7 @@ export default function AnimeCard({ anime, onAdd }) {
         className="rounded-md mb-3 h-60 object-cover"
       />
 
-      <h3 className="font-bold text-lg text-blue-700 dark:text-white mb-2">
+      <h3 className="text-sm sm:text-base font-semibold text-blue-700 dark:text-white mb-2">
         {anime.title}
       </h3>
 
