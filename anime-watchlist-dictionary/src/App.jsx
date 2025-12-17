@@ -4,15 +4,23 @@ import SearchBar from "../src/components/SearchBar.jsx";
 import AnimeList from "../src/components/AnimeList.jsx";
 import Watchlist from "../src/components/WatchList.jsx"; 
 import SettingsPanel from "../src/components/SettingsPanel.jsx";
+import CharacterList from "../src/components/CharacterList.jsx";
+import CharacterModal from "../src/components/CharacterModal.jsx";
+
 
 const STORAGE_KEY = "animeWatchlist_v1";
 
 export default function App() {
-  const [results, setResults] = useState([]);
+  const [animeResults, setAnimeResults] = useState([]);
+  const [characterResults, setCharacterResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [showWatchlist, setShowWatchlist] = useState(false);
+  const [searchType, setSearchType] = useState("anime"); // "anime" | "character"
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+
+
 
 
 const [accent, setAccent] = useState(() => {
@@ -40,8 +48,6 @@ const clearWatchlist = () => {
   setWatchlist([]);
   localStorage.removeItem(STORAGE_KEY);
 };
-
-
 
 
   const [watchlist, setWatchlist] = useState(() => {
@@ -81,25 +87,38 @@ const toggleTheme = () => {
     }
   }, [watchlist]);
 
-  const handleSearch = async (query) => {
+const handleSearch = async (query) => {
   if (!query) return;
 
   setHasSearched(true);
   setLoading(true);
-  setResults([]);
 
   try {
-    const response = await fetch(
-      `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}`
-    );
-    const data = await response.json();
-    setResults(data.data || []);
+    if (searchType === "anime") {
+      setAnimeResults([]);
+
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}`
+      );
+      const data = await response.json();
+      setAnimeResults(data.data || []);
+    } else {
+      setCharacterResults([]);
+
+      const response = await fetch(
+        `https://api.jikan.moe/v4/characters?q=${encodeURIComponent(query)}`
+      );
+      const data = await response.json();
+      setCharacterResults(data.data || []);
+    }
   } catch (err) {
     console.error("Search failed:", err);
   } finally {
     setLoading(false);
   }
 };
+
+
 
   const addToWatchlist = (anime) => {
     setWatchlist((prev) => {
@@ -132,16 +151,31 @@ const toggleTheme = () => {
   onOpenSettings={() => setSettingsOpen(true)}
 />
 
-    <SearchBar onSearch={handleSearch} />
+    <SearchBar
+  onSearch={handleSearch}
+  searchType={searchType}
+  setSearchType={setSearchType}
+/>
+
 
     <section className="px-4 sm:px-6 md:px-8 mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="md:col-span-2">
-       <AnimeList
-  results={results}
-  onAdd={addToWatchlist}
+        {searchType === "anime" ? (
+  <AnimeList
+    results={animeResults}
+    onAdd={addToWatchlist}
+    loading={loading}
+    hasSearched={hasSearched}
+  />
+) : (
+  <CharacterList
+  results={characterResults}
   loading={loading}
   hasSearched={hasSearched}
-/>
+  onSelectCharacter={setSelectedCharacter}
+  />
+)}
+
 
       </div>
       
@@ -190,6 +224,13 @@ const toggleTheme = () => {
   setAccent={setAccent}
   clearWatchlist={clearWatchlist}
 />
+
+{selectedCharacter && (
+  <CharacterModal
+    character={selectedCharacter}
+    onClose={() => setSelectedCharacter(null)}
+  />
+)}
 
   </div>
 );
