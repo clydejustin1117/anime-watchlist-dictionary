@@ -4,7 +4,7 @@ import EmptyState from "./EmptyState.jsx";
 
 
 
-export default function AnimeList({ results, onAdd, loading, hasSearched }) {
+export default function AnimeList({ results, onAdd, loading, hasSearched, onOpenAnime, }) {
   if (!hasSearched && !loading) {
     return (
       <EmptyState
@@ -30,7 +30,7 @@ export default function AnimeList({ results, onAdd, loading, hasSearched }) {
             <AnimeCardLoad key={i} />
           ))
         : results.map((anime) => (
-            <AnimeCard key={anime.mal_id} anime={anime} onAdd={onAdd} />
+            <AnimeCard key={anime.mal_id} anime={anime} onAdd={onAdd} onOpen={() => onOpenAnime(anime)}  />
           ))}
     </div>
   );

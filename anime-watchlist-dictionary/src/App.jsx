@@ -6,6 +6,7 @@ import Watchlist from "../src/components/WatchList.jsx";
 import SettingsPanel from "../src/components/SettingsPanel.jsx";
 import CharacterList from "../src/components/CharacterList.jsx";
 import CharacterModal from "../src/components/CharacterModal.jsx";
+import AnimeModal from "../src/components/AnimeModal.jsx";
 
 
 const STORAGE_KEY = "animeWatchlist_v1";
@@ -19,6 +20,9 @@ export default function App() {
   const [showWatchlist, setShowWatchlist] = useState(false);
   const [searchType, setSearchType] = useState("anime"); // "anime" | "character"
   const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedAnime, setSelectedAnime] = useState(null);
+
+  
 
 
 
@@ -175,6 +179,7 @@ const handleSearch = async (query) => {
     onAdd={addToWatchlist}
     loading={loading}
     hasSearched={hasSearched}
+    onOpenAnime={setSelectedAnime}
   />
 ) : (
   <CharacterList
@@ -243,6 +248,14 @@ const handleSearch = async (query) => {
     onClose={() => setSelectedCharacter(null)}
   />
 )}
+
+{selectedAnime && (
+  <AnimeModal
+    anime={selectedAnime}
+    onClose={() => setSelectedAnime(null)}
+  />
+)}
+
 
   </div>
 );
