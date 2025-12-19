@@ -35,6 +35,10 @@ const accentMap = {
  
 };
 
+const [watchSite, setWatchSite] = useState(() => {
+  return localStorage.getItem("watchSite") || "hianime";
+});
+
 
 useEffect(() => {
   localStorage.setItem("accent", accent);
@@ -43,6 +47,11 @@ useEffect(() => {
     accentMap[accent]
   );
 }, [accent]);
+
+useEffect(() => {
+  localStorage.setItem("watchSite", watchSite);
+}, [watchSite]);
+
 
 const clearWatchlist = () => {
   setWatchlist([]);
@@ -223,6 +232,9 @@ const handleSearch = async (query) => {
   accent={accent}
   setAccent={setAccent}
   clearWatchlist={clearWatchlist}
+  watchSite={watchSite}
+  setWatchSite={setWatchSite}
+  
 />
 
 {selectedCharacter && (

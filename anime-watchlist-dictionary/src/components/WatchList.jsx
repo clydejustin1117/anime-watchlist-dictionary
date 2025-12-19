@@ -1,4 +1,6 @@
 import EmptyState from "./EmptyState.jsx";
+import { openExternalWatchSearch } from "../utils/watchRedirect.jsx";
+
 
 export default function Watchlist({ items, onRemove, onOpenDetails }) {
   return (
@@ -38,16 +40,13 @@ export default function Watchlist({ items, onRemove, onOpenDetails }) {
               </div>
 
               <div className="flex justify-between mt-3">
-                {anime.url && (
-                  <a
-                    href={anime.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-2 py-1 bg-green-500 text-white text-xs rounded-lg hover:bg-green-600 transition"
-                  >
-                    Watch
-                  </a>
-                )}
+                <button
+  onClick={() => openExternalWatchSearch(anime.title)}
+  className="px-2 py-1 bg-green-500 text-white text-xs rounded-lg hover:bg-green-600 transition"
+>
+  ▶ Watch
+</button>
+
 
                 <button
                   onClick={() => onRemove(anime.mal_id)}

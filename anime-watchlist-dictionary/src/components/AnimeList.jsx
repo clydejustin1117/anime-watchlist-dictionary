@@ -2,6 +2,8 @@ import AnimeCard from "./AnimeCard.jsx";
 import AnimeCardLoad from "./AnimeCardLoad.jsx";
 import EmptyState from "./EmptyState.jsx";
 
+
+
 export default function AnimeList({ results, onAdd, loading, hasSearched }) {
   if (!hasSearched && !loading) {
     return (

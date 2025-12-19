@@ -6,6 +6,8 @@ export default function SettingsPanel({
   accent,
   setAccent,
   clearWatchlist,
+  watchSite,
+  setWatchSite,
 }) {
   if (!open) return null;
 
@@ -35,6 +37,7 @@ export default function SettingsPanel({
             Accent Color
           </p>
 
+          
           <div className="flex gap-3">
             {["blue", "purple", "green"].map((c) => (
               <button
@@ -51,6 +54,29 @@ export default function SettingsPanel({
             ))}
           </div>
         </div>
+
+        <div className="mb-6">
+  <p className="font-medium mb-2 dark:text-gray-200">
+    Watch Site
+  </p>
+
+  <select
+  value={watchSite}
+  onChange={(e) => setWatchSite(e.target.value)}
+  className="w-full p-2 rounded-md
+    bg-gray-100 dark:bg-gray-700
+    text-gray-900 dark:text-white
+    border border-gray-300 dark:border-gray-600
+    focus:outline-none
+    focus:ring-2 focus:ring-[var(--accent-color)]
+  "
+>
+  <option value="hianime">HiAnime</option>
+  <option value="crunchyroll">Crunchyroll</option>
+  <option value="google">Google</option>
+</select>
+
+</div>
 
        
         <div className="mt-10">
